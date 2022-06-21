@@ -30,20 +30,12 @@
                         <div class="col-xl-8">
                             <h2 class="fw-bolder fs-5 mb-4">News</h2>
                             <!-- News item-->
+                            {% for i in Posts|slice(0, 3)  %}
                             <div class="mb-4">
-                                <div class="small text-muted">May 12, 2022</div>
-                                <a class="link-dark" href="#!"><h3>Start Bootstrap releases Bootstrap 5 updates for templates and themes</h3></a>
+                                <div class="small text-muted">Posted On {{ i.date|date("d M Y H:i ", false) }}</div>
+                                <a class="link-dark" href="{{ path('Post',{'id':i.id}) }}"><h3>{{ i.Title }}</h3></a>
                             </div>
-                            <!-- News item-->
-                            <div class="mb-5">
-                                <div class="small text-muted">May 5, 2022</div>
-                                <a class="link-dark" href="#!"><h3>Bootstrap 5 has officially landed</h3></a>
-                            </div>
-                            <!-- News item-->
-                            <div class="mb-5">
-                                <div class="small text-muted">Apr 21, 2022</div>
-                                <a class="link-dark" href="#!"><h3>This is another news article headline, but this one is a little bit longer</h3></a>
-                            </div>
+                            {% endfor %}
                             <div class="text-end mb-5 mb-xl-0">
                                 <a class="text-decoration-none" href="#!">
                                     More news
