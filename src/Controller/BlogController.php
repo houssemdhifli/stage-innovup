@@ -14,13 +14,39 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog", name="blog")
      */
+    public function blog(): Response
+    {
+        $Posts= $this->getDoctrine()->
+        getRepository(BlogPost::class)->sortbydate();
+        $FirstPost=$Posts[0];
+        return $this->render('blog/blog-home.html.twig', [
+            'Posts'=>$Posts,'FirstPost'=>$FirstPost]);
+    }
+    /**
+     * @Route("/", name="/")
+     */
     public function index(): Response
     {
         $Posts= $this->getDoctrine()->
-        getRepository(BlogPost::class)->findAll();
-        $FirstPost=end($Posts);
-        return $this->render('blog/blog-home.html.twig', [
-            'Posts'=>$Posts,'FirstPost'=>$FirstPost]);
+        getRepository(BlogPost::class)->sortbydate();
+        return $this->render('blog/index.html.twig', [
+            'Posts'=>$Posts]);
+    }
+    /**
+     * @Route("/about", name="about")
+     */
+    public function about(): Response
+    {
+
+        return $this->render('blog/about.html.twig');
+    }
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function contact(): Response
+    {
+
+        return $this->render('blog/contact.html.twig');
     }
     /**
      * @Route("/Post/{id}", name="Post")

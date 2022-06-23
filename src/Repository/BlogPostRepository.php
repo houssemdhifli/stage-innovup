@@ -18,6 +18,14 @@ class BlogPostRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, BlogPost::class);
     }
+    public function sortbydate()
+    {
+        return $this->createQueryBuilder('b')
+            ->orderBy('b.date', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     // /**
     //  * @return BlogPost[] Returns an array of BlogPost objects
